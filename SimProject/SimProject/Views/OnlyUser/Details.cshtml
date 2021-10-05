@@ -1,0 +1,37 @@
+﻿@model ProtocolSim.OnlyUser
+
+@{
+    ViewBag.Title = "פרטים";
+}
+
+<h2 style="color:blue">פרטי יחידה/ לקוח</h2>
+
+<div>
+    <hr />
+    <dl class="table text-right">
+    
+        <dt>
+            @Html.DisplayNameFor(model => model.Unitname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unitname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ערוך", "Edit", new { id = Model.Sid }) |
+    @Html.ActionLink("חזרה לרשימת היחידות/ לקוחות", "Index") |
+    @Html.ActionLink("חזרה לרשימת המכשירים", "Index", "OnlyDevice") |
+    @Html.ActionLink("חזרה לרשימת הסימים", "Index")
+
+</p>

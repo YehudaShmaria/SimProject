@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ProtocolSim.Sim>
+
+@{
+    ViewBag.Title = "רשימת סימים אצל לקוח";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #cotert{
+        width:350px;
+    }
+    #H1{
+        color:blue;
+        padding:10px;
+    }
+    #H2{
+        color:black;
+        padding: 10px;
+    }
+</style>
+<div id="cotert">
+    <h2 id="H1">רשימת הסימים ביחידה</h2>
+    <h3 id="H2">מספר הסימים ביחידה הספציפית:  @ViewBag.counter</h3>
+</div>
+
+<table style="margin-top:30px" class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Company_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PunNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImeiSim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Packageplan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unitname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImeiDevice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Company_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PunNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImeiSim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Packageplan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unitname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImeiDevice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+      
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("חזרה לרשימת הלקוחות", "Index")

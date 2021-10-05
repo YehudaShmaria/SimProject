@@ -1,0 +1,48 @@
+﻿@model ProtocolSim.Login
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>מחק משתמש</h2>
+
+<h3>אתה בטוח שאתה רוצה למחוק למשתמש לא תיהיה גישה לאתר??</h3>
+<div>
+    <hr />
+    <dl class="table text-right">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="מחק" class="btn btn-default" /> |
+            @Html.ActionLink("חזרה לרשימת משתמשים", "Index")
+        </div>
+    }
+</div>

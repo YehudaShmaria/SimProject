@@ -1,0 +1,145 @@
+﻿@model IEnumerable<ProtocolSim.Sim>
+
+@{
+    ViewBag.Title = "הדף הראשי";
+}
+
+<style>
+    #Cotert{
+        border:solid;
+        border-color:blue;
+        border-radius:5px;
+        width:800px;
+        margin:auto;
+        margin-top:10px;
+        background-color:aliceblue;
+    }
+</style>
+
+<div class="row">
+    <div id="Cotert">
+        <p class="h1 text-center">מאגר מידע הסימים של מדור טוכנולוגיה</p>
+        <div style="padding:20px">
+            <img style="height:80px;" class="img-thumbnail center-block" src="~/images/SimImg1.jpg" />
+        </div>
+    </div>
+</div>
+<div style="padding-top:30px; margin:auto"class="row">
+    <div style="border-radius:20%;" class="col-lg-4 text-left">
+        <div style="padding-bottom:8px; padding-left:20px">
+            <h3 style="color:blue" class="text-left">
+                מספר הסימים במאגר:
+            </h3>
+            <h4 style="color:black" class="text-left">
+                @ViewBag.Counter
+            </h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 text-left">
+        <h3>
+            @Html.ActionLink("צור סים חדש", "Create")
+        </h3>
+    </div>
+    <div class="col">
+        <form class="form-inline" action="~/AllData/SearchSim" onsubmit="return validateForm()" method="get">
+            <label style="font-size:large">בצע חיפוש:</label>
+            <br />
+            <label for="Filter" style="font-size:large">הקלד בבקשה מספר פלאפון או מספר Imei של הסים:</label>
+            <br />
+            <input style="margin-top:14px" type="text" required class="form-control" placeholder="חיפוש" name="Filter" />
+            <input style="margin-top:14px" onclick=" validateForm()" type="submit" value="חפש" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+<table class="table" style="margin-top:30px">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Company_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PunNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImeiSim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Packageplan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unitname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImeiDevice)
+        </th>
+        <th class="n">
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Company_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PunNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImeiSim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Packageplan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unitname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImeiDevice)
+            </td>
+            <td class="n">
+               @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.ActionLink("ערוך", "Edit", new { id = item.SId }) |
+                @Html.ActionLink("פרטים", "Details", new { id = item.SId }) |
+                @Html.ActionLink("מחק", "Delete", new { id = item.SId })
+            </td>
+        </tr>
+    }
+
+</table>

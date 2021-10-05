@@ -1,0 +1,48 @@
+﻿@model ProtocolSim.OnlyDevice
+
+@{
+    ViewBag.Title = "ערוך";
+}
+
+<h2 style="color:blue">ערוך נתוני מכשיר</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeviceName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DeviceName, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.DeviceName, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImeiDevice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImeiDevice, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.ImeiDevice, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="עדכן ושמור" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("חזרה לרשימת מכשירים", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

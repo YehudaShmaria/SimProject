@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProtocolSim.Login>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:blue">רשימת משתמשים באתר</h2>
+
+<h3 style="float:left">
+    @Html.ActionLink("צור משתמש חדש", "Create")
+</h3>
+
+<br />
+<form class="form-inline" action="~/Admin/SharchLogin" onsubmit="return validateForm()" method="get">
+    <label for="Filter" style="font-size:large">הקלד את שם המשתמש:</label>
+    <br />
+    <input type="text" required class="form-control" placeholder="חיפוש" name="Filter" />
+    <input onclick="validateForm()" type="submit" value="חפש" class="btn btn-primary" />
+</form>
+<table style="margin-top:30px" class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.ActionLink("ערוך", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("פרטים", "Details", new { id = item.Id }) |
+                @Html.ActionLink("מחק", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

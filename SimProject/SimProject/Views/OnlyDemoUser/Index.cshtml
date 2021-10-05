@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SimProject.Models.OnlyDemoUser>
+
+@{
+    ViewBag.Title = "רשימת לקוחות";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="text-right">
+        <h2 style="color:blue">רשימת לקוחות/ יחידות מצומצמת</h2>
+        <h3>אין אפשרות לעדכן משתמש על מנת לעדכן משתמש עבור לרשימה הרחבה....</h3>
+    </div>
+</div>
+
+<form style="margin-top:20px" class="form-inline" action="~/OnlyDemoUser/SearchUser" onsubmit="return validateForm()" method="get">
+    <label for="Filter" style="font-size:large">בבקשה הקלד את שם היחידה/ לקוח</label>
+    <br />
+    <input type="text" required class="form-control" placeholder="חיפוש" name="Filter" />
+    <input onclick="validateForm()" type="submit" value="חפש" class="btn btn-primary" />
+</form>
+<table style="margin-top:30px" class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NameUnit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumOfSim)
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfSim)
+            </td>
+            <td>
+                @Html.ActionLink("פרטי סימים", "ListSim", new { Filter = item.NameUnit },null)
+            </td>
+        </tr>
+    }
+
+</table>

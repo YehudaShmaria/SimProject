@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ProtocolSim.OnlyUser>
+
+@{
+    ViewBag.Title = "רשימת לקוחות";
+}
+
+<div class="row">
+    <div class="text-right">
+        <h2 style="color:blue">נתוני לקוחות/ יחידות</h2>
+        <h3>על מנת לראות את מספר הסימים בכל לקוח כנס לרשימה המצומצמת....</h3>
+    </div>
+</div>
+
+<form style="margin-top:20px" class="form-inline" action="~/OnlyUser/SearchUser" onsubmit="return validateForm()" method="get">
+    <label for="Filter" style="font-size:large">בבקשה הקלד את שם היחידה/ לקוח</label>
+    <br />
+    <input type="text" required class="form-control" placeholder="חיפוש" name="Filter" />
+    <input onclick="validateForm()" type="submit" value="חפש" class="btn btn-primary" />
+</form>
+<table style="margin-top:30px" class="table">
+    <tr>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Unitname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Unitname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact)
+        </td>
+        <td>
+            @Html.ActionLink("ערוך", "Edit", new { id=item.Sid }) |
+            @Html.ActionLink("פרטי יחידה/ לקוח", "Details", new { id = item.Sid }) 
+        </td>
+    </tr>
+}
+
+</table>

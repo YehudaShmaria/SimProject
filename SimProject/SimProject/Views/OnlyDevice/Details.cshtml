@@ -1,0 +1,35 @@
+﻿@model ProtocolSim.OnlyDevice
+
+@{
+    ViewBag.Title = "פרטים";
+}
+
+<h2 style="color:blue">פרטי מכשיר</h2>
+
+<div>
+    <hr />
+    <dl class="table text-right">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeiDevice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeiDevice)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ערוך", "Edit", new { id = Model.SId }) |
+    @Html.ActionLink("חזרה לרשימת המכשירים", "Index") |
+    @Html.ActionLink("חזרה לרשימת הלקוחות", "Index", "OnlyUser") |
+    @Html.ActionLink("חזרה לרשימת הסימים", "Index") 
+
+</p>

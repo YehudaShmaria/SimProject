@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - מדור טוכנולוגיה</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        tr{
+            text-align:right;
+        }
+        th{
+            text-align:right;
+            background-color:antiquewhite;
+        }
+        .n{
+            color:red;
+        }
+
+        h2 {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body style="background-color:white" dir="rtl">
+    <div style="opacity: 0.8; text-align:right" class=" navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <img style="height:40px;border-radius:10px; padding:3px" src="~/images/SimImg1.jpg" />
+            </div>
+            <div class="navbar-collapse collapse text-right">
+                @if (User.IsInRole("Admin"))
+                {
+                <ul class="nav navbar-nav text-right">
+                    <li>@Html.ActionLink("כל הנתונים", "Index", "AllData")</li>
+                    <li>@Html.ActionLink("נתוני סים", "Index", "OnlySim")</li>
+                    <li>@Html.ActionLink("נתוני לקוחות", "EntryToUser", "Home")</li>
+                    <li>@Html.ActionLink("נתוני מכשירים", "Index", "OnlyDevice")</li>
+                    <li>@Html.ActionLink("ניהול משתמשים", "Index", "Admin")</li>
+                </ul>
+                 }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+        @if(User.Identity.IsAuthenticated){
+        <div style="text-align:left">
+            <h3>שלום @User.Identity.Name</h3>
+            @Html.ActionLink("יציאה", "SignOut", "Home")
+        </div>
+        }
+        @RenderBody()
+        <hr />
+        <footer>
+            <p> ניהול סימים - אגף חקירות מודיעין</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

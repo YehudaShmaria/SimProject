@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SimContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sim">
+          <Key>
+            <PropertyRef Name="SId" />
+          </Key>
+          <Property Name="SId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="PunNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="ImeiSim" Type="nvarchar" MaxLength="25" />
+          <Property Name="Packageplan" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="Unitname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="25" />
+          <Property Name="ImeiDevice" Type="nvarchar" MaxLength="25" />
+          <Property Name="Note" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SimProject.dbo.Login' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SimProject.dbo.OnlyDevice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OnlyDevice">
+          <Key>
+            <PropertyRef Name="SId" />
+          </Key>
+          <Property Name="SId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImeiDevice" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SimProject.dbo.OnlySim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OnlySim">
+          <Key>
+            <PropertyRef Name="SId" />
+            <PropertyRef Name="Ip" />
+          </Key>
+          <Property Name="SId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="PunNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="ImeiSim" Type="nvarchar" MaxLength="50" />
+          <Property Name="Packageplan" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SimProject.dbo.OnlyUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OnlyUser">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unitname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_User_ToTable">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SimContextStoreContainer">
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sim" EntityType="Self.Sim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Login].[Id] AS [Id], 
+    [Login].[UserName] AS [UserName], 
+    [Login].[Password] AS [Password], 
+    [Login].[RoleName] AS [RoleName]
+    FROM [dbo].[Login] AS [Login]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OnlyDevice" EntityType="Self.OnlyDevice" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OnlyDevice].[SId] AS [SId], 
+    [OnlyDevice].[DeviceName] AS [DeviceName], 
+    [OnlyDevice].[ImeiDevice] AS [ImeiDevice]
+    FROM [dbo].[OnlyDevice] AS [OnlyDevice]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OnlySim" EntityType="Self.OnlySim" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OnlySim].[SId] AS [SId], 
+    [OnlySim].[Company Name] AS [Company Name], 
+    [OnlySim].[PunNumber] AS [PunNumber], 
+    [OnlySim].[ImeiSim] AS [ImeiSim], 
+    [OnlySim].[Packageplan] AS [Packageplan], 
+    [OnlySim].[Apn] AS [Apn], 
+    [OnlySim].[Ip] AS [Ip], 
+    [OnlySim].[StartDate] AS [StartDate]
+    FROM [dbo].[OnlySim] AS [OnlySim]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OnlyUser" EntityType="Self.OnlyUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OnlyUser].[Sid] AS [Sid], 
+    [OnlyUser].[Unitname] AS [Unitname], 
+    [OnlyUser].[Contact] AS [Contact]
+    FROM [dbo].[OnlyUser] AS [OnlyUser]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_User_ToTable" Association="Self.FK_User_ToTable">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SimContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Sims" EntityType="SimContext.Sim" />
+          <EntitySet Name="OnlyDevices" EntityType="SimContext.OnlyDevice" />
+          <EntitySet Name="OnlySims" EntityType="SimContext.OnlySim" />
+          <EntitySet Name="OnlyUsers" EntityType="SimContext.OnlyUser" />
+          <EntitySet Name="Roles" EntityType="SimContext.Role" />
+          <EntitySet Name="Users" EntityType="SimContext.User" />
+          <EntitySet Name="Logins" EntityType="SimContext.Login" />
+          <AssociationSet Name="FK_User_ToTable" Association="SimContext.FK_User_ToTable">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Sim">
+          <Key>
+            <PropertyRef Name="SId" />
+          </Key>
+          <Property Name="SId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PunNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ImeiSim" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Packageplan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="Unitname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ImeiDevice" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OnlyDevice">
+          <Key>
+            <PropertyRef Name="SId" />
+          </Key>
+          <Property Name="SId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImeiDevice" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OnlySim">
+          <Key>
+            <PropertyRef Name="SId" />
+            <PropertyRef Name="Ip" />
+          </Key>
+          <Property Name="SId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PunNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ImeiSim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Packageplan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="OnlyUser">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Unitname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="SimContext.FK_User_ToTable" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="SimContext.FK_User_ToTable" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_User_ToTable">
+          <End Type="SimContext.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="SimContext.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SimContextStoreContainer" CdmEntityContainer="SimEntities">
+          <EntitySetMapping Name="Sims">
+            <EntityTypeMapping TypeName="SimContext.Sim">
+              <MappingFragment StoreEntitySet="Sim">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ImeiDevice" ColumnName="ImeiDevice" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Unitname" ColumnName="Unitname" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Ip" ColumnName="Ip" />
+                <ScalarProperty Name="Apn" ColumnName="Apn" />
+                <ScalarProperty Name="Packageplan" ColumnName="Packageplan" />
+                <ScalarProperty Name="ImeiSim" ColumnName="ImeiSim" />
+                <ScalarProperty Name="PunNumber" ColumnName="PunNumber" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="SId" ColumnName="SId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlyDevices">
+            <EntityTypeMapping TypeName="SimContext.OnlyDevice">
+              <MappingFragment StoreEntitySet="OnlyDevice">
+                <ScalarProperty Name="ImeiDevice" ColumnName="ImeiDevice" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="SId" ColumnName="SId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlySims">
+            <EntityTypeMapping TypeName="SimContext.OnlySim">
+              <MappingFragment StoreEntitySet="OnlySim">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Ip" ColumnName="Ip" />
+                <ScalarProperty Name="Apn" ColumnName="Apn" />
+                <ScalarProperty Name="Packageplan" ColumnName="Packageplan" />
+                <ScalarProperty Name="ImeiSim" ColumnName="ImeiSim" />
+                <ScalarProperty Name="PunNumber" ColumnName="PunNumber" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="SId" ColumnName="SId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlyUsers">
+            <EntityTypeMapping TypeName="SimContext.OnlyUser">
+              <MappingFragment StoreEntitySet="OnlyUser">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Unitname" ColumnName="Unitname" />
+                <ScalarProperty Name="Sid" ColumnName="Sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SimContext.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SimContext.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="SimContext.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

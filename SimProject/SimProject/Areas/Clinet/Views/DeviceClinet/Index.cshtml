@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProtocolSim.OnlyDevice>
+
+@{
+    ViewBag.Title = "מידע מכשירים";
+    Layout = "~/Areas/Clinet/Views/Shared/ClinetLayout.cshtml";
+}
+
+<h2>נתוני מכשירים</h2>
+<form class="form-inline" action="~/DeviceClinet/SearchDavice" onsubmit="return validateForm()" method="get">
+    <label for="Filter" style="font-size:large">בבקשה הקלד את ה Imei של המכשיר</label>
+    <br />
+    <input type="text" required class="form-control" placeholder="חיפוש" name="Filter" />
+    <input onclick="validateForm()" type="submit" value="חפש" class="btn btn-primary" />
+</form>
+<table style="margin-top:30px" class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImeiDevice)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImeiDevice)
+            </td>
+
+            <td>
+                @Html.ActionLink("ערוך", "Edit", new { id = item.SId }) |
+                @Html.ActionLink("פרטי מכשיר", "Details", new { id = item.SId }) |
+                @Html.ActionLink("ראה פרטי סים", "Details", "SimClinet", new { id = item.SId }, null) |
+            </td>
+        </tr>
+    }
+
+</table>
+

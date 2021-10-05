@@ -1,0 +1,76 @@
+﻿@model ProtocolSim.OnlySim
+
+@{
+    ViewBag.Title = "פרטים";
+}
+
+<h2 style="color:blue">פרטי הסים</h2>
+
+<div>
+    <hr />
+    <dl class="table text-right">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PunNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PunNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeiSim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeiSim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Packageplan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Packageplan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ערוך", "Edit", new { id = Model.SId }) |
+    @Html.ActionLink("חזרה לרשימת הסימים", "Index") |
+    @Html.ActionLink("חזרה לרשימת הלקוחות", "Index", "OnlyUser") |
+    @Html.ActionLink("חזרה לרשימת המכשירים", "Index", "OnlyDevice")
+
+</p>

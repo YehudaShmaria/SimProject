@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6c2716c29dd4af28d6879e1d3dd60e4" Name="Diagram1">
+        <EntityTypeShape EntityType="SimContext.Sim" Width="1.5" PointX="8.375" PointY="0.625" />
+        <EntityTypeShape EntityType="SimContext.OnlyDevice" Width="1.5" PointX="4.5" PointY="0.625" />
+        <EntityTypeShape EntityType="SimContext.OnlySim" Width="1.5" PointX="6.625" PointY="0.625" />
+        <EntityTypeShape EntityType="SimContext.OnlyUser" Width="1.5" PointX="4.5" PointY="2.5" />
+        <EntityTypeShape EntityType="SimContext.Role" Width="1.5" PointX="0.5" PointY="0.625" />
+        <EntityTypeShape EntityType="SimContext.User" Width="1.5" PointX="2.75" PointY="0.625" />
+        <EntityTypeShape EntityType="SimContext.Login" Width="1.5" PointX="0.5" PointY="2.625" />
+        <AssociationConnector Association="SimContext.FK_User_ToTable" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

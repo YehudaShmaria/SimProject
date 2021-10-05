@@ -1,0 +1,127 @@
+﻿@model ProtocolSim.Sim
+
+@{
+    ViewBag.Title = "מחק";
+}
+
+<h2 style="color:blue">מחק נתונים מהמאגר</h2>
+
+<h3 style="color:red">האם אתה בטוח שאתה רוצה למחוק??
+    <br />
+  מומלץ לוודאות שוב פעם...</h3>
+<div>
+
+    <hr />
+    <h3>ערכי הנתון</h3>
+    <dl class="table text-right">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PunNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PunNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeiSim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeiSim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Packageplan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Packageplan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unitname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unitname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeiDevice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeiDevice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div style="margin-right:200px" class="form-actions no-color">
+        <input type="submit" value="מחק" class="btn btn-default" />
+        <br />
+        @Html.ActionLink("חזרה לרשימת כל הנתונים", "Index")
+    </div>
+       
+    }
+</div>

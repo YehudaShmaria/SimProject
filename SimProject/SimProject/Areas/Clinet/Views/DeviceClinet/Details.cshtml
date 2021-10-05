@@ -1,0 +1,34 @@
+﻿@model ProtocolSim.OnlyDevice
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Clinet/Views/Shared/ClinetLayout.cshtml";
+}
+
+<h2>פרטי מכשיר</h2>
+
+<div>
+    <hr />
+    <dl class="table text-right">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImeiDevice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImeiDevice)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ערוך", "Edit", new { id = Model.SId }) |
+    @Html.ActionLink("חזרה לרשימת המכשירים", "Index") |
+    @Html.ActionLink("חזרה לרשימת הסימים", "Index","SimClinet")
+</p>

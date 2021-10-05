@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "EntryToUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center">
+    <div style="color:brown">
+        <h1>ברוכים הבאים לרשימת הלקוחות</h1>
+        <h3>בחר אחת מהאפשרויות</h3>
+    </div>
+    <button>@Html.ActionLink("צפייה בכל הרשימה", "Index", "OnlyUser")</button>
+    <button>@Html.ActionLink("צפייה ברשימה מצומצמת", "Index", "OnlyDemoUser")</button>
+</div>
